@@ -1,0 +1,46 @@
+{
+  "name": "store-front-api",
+  "version": "1.0.0",
+  "description": "Udacity Store Front API with Postgress Project",
+  "main": "server.js",
+  "scripts": {
+    "clear": "rimraf dist/ || true",
+    "build": "tsc",
+    "test": "npm run clear && npm run build && NODE_ENV=testing jasmine",
+    "serve": "nodemon src/server.ts",
+    "format": "prettier --config .prettierrc.js 'src/**/*.ts' --write",
+    "check": "eslint --ext .ts .",
+    "deploy": "echo 'deployed!'",
+    "migrate": "npx db-migrate up"
+  },
+  "author": "Mostafa Said - SunHorus",
+  "license": "ISC",
+  "dependencies": {
+    "db-migrate": "^0.11.13",
+    "db-migrate-pg": "^1.2.2",
+    "dotenv": "^11.0.0",
+    "express": "^4.17.2",
+    "pg": "^8.7.1",
+    "postgres": "^1.0.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/jasmine": "^3.10.3",
+    "@types/node": "^17.0.8",
+    "@types/pg": "^8.6.4",
+    "@types/supertest": "^2.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.9.1",
+    "@typescript-eslint/parser": "^5.9.1",
+    "eslint": "^8.6.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jasmine": "^4.0.2",
+    "jasmine-spec-reporter": "^7.0.0",
+    "jasmine-ts": "^0.4.0",
+    "nodemon": "^2.0.15",
+    "prettier": "^2.5.1",
+    "supertest": "^6.2.1",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.4"
+  }
+}
