@@ -5,7 +5,7 @@ import { GetProductsResponse, ProductsStore } from "./types";
 
 
 export default class ProductStoreAccess implements ProductsStore {
-    async GetProducts(): Promise<GetProductsResponse> {
+    async Index(): Promise<GetProductsResponse> {
         try {
             const conn = await PostgresClient.connect();
             const query = 'SELECT * FROM products';
@@ -15,7 +15,7 @@ export default class ProductStoreAccess implements ProductsStore {
             throw new Error(`cannot get products ${err}`)
         }
     }
-    async StoreProduct(payload: Product): Promise<Product> {
+    async Create(payload: Product): Promise<Product> {
         try {
             const conn = await PostgresClient.connect();
             const query = 'INSERT INTO products (name, price, category) VALUES ($1, $2, $3) RETURNING *';
@@ -30,7 +30,7 @@ export default class ProductStoreAccess implements ProductsStore {
         }
     }
 
-    async DeleteProduct(ProductId: string): Promise<boolean> {
+    async Delete(ProductId: string): Promise<boolean> {
         try {
             const conn = await PostgresClient.connect();
             const query = 'delete from products where id = $1';
@@ -43,7 +43,7 @@ export default class ProductStoreAccess implements ProductsStore {
         }
     }
 
-    async GetProduct(ProductId: string): Promise<Product> {
+    async Show(ProductId: string): Promise<Product> {
         try {
             const conn = await PostgresClient.connect();
             const sql = 'SELECT * FROM products WHERE id=($1)'
@@ -53,7 +53,7 @@ export default class ProductStoreAccess implements ProductsStore {
             throw new Error(`Could not find product ${ProductId}. Error: ${err}`)
         }
     }
-    async UpdateProduct(ProductId: string): Promise<Product> {
+    async Update(ProductId: string): Promise<Product> {
         throw new Error(`asdasdasd`)
     }
 

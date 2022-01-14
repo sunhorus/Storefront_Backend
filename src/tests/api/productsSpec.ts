@@ -1,6 +1,7 @@
 import { app } from '../../server';
 import supertest from 'supertest';
 import { equal } from 'assert';
+import migratorDown from '../../loaders/providers/migratorDown';
 
 const request = supertest.agent(app);
 
@@ -9,6 +10,8 @@ beforeAll((done) => {
     done();
   });
 });
+
+
 
 describe('Test products listing', () => {
   it('should return sucess when listing', async () => {
@@ -27,4 +30,10 @@ describe('Test products listing', () => {
         equal(response.body.name, 'mobile charger');
       });
   });
+
+
+});
+afterAll(async () => {
+  await migratorDown();
+  
 });

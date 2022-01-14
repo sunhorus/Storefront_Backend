@@ -1,4 +1,5 @@
 import { Product } from "../models/product";
+import { User } from "../models/user";
 
 export interface GetProductsResponse {
     data: Product[];
@@ -6,17 +7,27 @@ export interface GetProductsResponse {
 
 
 export interface UsersStore {
-    signIn(): string;
+    create(user: User): Promise<User>;
+
+    authenticate(username: string, password: string): Promise<User | null>;
 }
 
 export interface ProductsStore{
-    GetProducts(): Promise<GetProductsResponse>;
+    /*
+    INDEX
+    SHOW
+    CREATE
+    EDIT
+    DELETE
+    */
+    
+    Index(): Promise<GetProductsResponse>;
 
-    GetProduct(ProductId: string): Promise<Product>
+    Show(ProductId: string): Promise<Product>
 
-    StoreProduct(payload: Product): Promise<Product>;
+    Create(payload: Product): Promise<Product>;
 
-    DeleteProduct(ProductId: string): Promise<boolean>;
+    Delete(ProductId: string): Promise<boolean>;
 
-    UpdateProduct(ProductId: string): Promise<Product>;
+    Update(ProductId: string): Promise<Product>;
 }

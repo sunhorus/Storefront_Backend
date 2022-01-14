@@ -22,4 +22,11 @@ export default {
     PASSWORD: process.env.POSTGRES_PASSWORD,
     NAME: process.env.POSTGRES_DB,
   },
+  encrption: {
+    pepper: process.env.BCRYPT_PASSWORD,
+    salt: process.env.SALT_ROUNDS
+  },
+  jwt: {
+    secret: process.env.TOKEN_SECRET
+  }
 };

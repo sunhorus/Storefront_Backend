@@ -11,21 +11,28 @@
     "format": "prettier --config .prettierrc.js 'src/**/*.ts' --write",
     "check": "eslint --ext .ts .",
     "deploy": "echo 'deployed!'",
-    "migrate": "npx db-migrate up"
+    "migrate": "npx db-migrate up",
+    "DownMigration": "npx db-migrate reset"
   },
   "author": "Mostafa Said - SunHorus",
   "license": "ISC",
   "dependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
     "db-migrate": "^0.11.13",
     "db-migrate-pg": "^1.2.2",
     "dotenv": "^11.0.0",
     "express": "^4.17.2",
+    "jsonwebtoken": "^8.5.1",
     "pg": "^8.7.1",
     "postgres": "^1.0.2"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
     "@types/jasmine": "^3.10.3",
+    "@types/jsonwebtoken": "^8.5.7",
     "@types/node": "^17.0.8",
     "@types/pg": "^8.6.4",
     "@types/supertest": "^2.0.11",
