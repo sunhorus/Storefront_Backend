@@ -13,14 +13,7 @@ export interface UsersStore {
 }
 
 export interface ProductsStore{
-    /*
-    INDEX
-    SHOW
-    CREATE
-    EDIT
-    DELETE
-    */
-    
+
     Index(): Promise<GetProductsResponse>;
 
     Show(ProductId: string): Promise<Product>
