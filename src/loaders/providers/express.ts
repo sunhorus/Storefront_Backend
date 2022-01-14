@@ -7,7 +7,6 @@ import cors from 'cors';
 export default ({ app }: { app: Application }) => {
   
   app.use('/api/v1', routes());
-  app.use(cors());
   app.use((req: Request, res: Response, next: NextFunction) => {
     const err = new NotFoundURLError();
     next(err);

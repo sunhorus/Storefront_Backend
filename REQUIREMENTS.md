@@ -9,31 +9,31 @@ These are the notes from a meeting with the frontend developer that describe wha
 [
   {
     path: '/api/v1/products',
-    methods: [ 'GET', 'POST' ]
+    methods: [ 'GET', 'POST' ],
   },
   {
     path: '/api/v1/products/:id',
-    methods: [ 'GET', 'DELETE', 'PUT' ]
+    methods: [ 'GET', 'DELETE', 'PUT' ],
   },
   {
     path: '/api/v1/users',
-    methods: [ 'POST' ]
+    methods: [ 'POST' ],
   },
   {
     path: '/api/v1/users/authenticate',
-    methods: [ 'POST' ]
+    methods: [ 'POST' ],
   },
   {
     path: '/api/v1/orders',
-    methods: [ 'GET' ]
+    methods: [ 'GET', 'POST' ],
   },
   {
     path: '/api/v1/orders/:id',
-    methods: [ 'GET', 'DELETE', 'PUT' ]
+    methods: [ 'GET', 'DELETE', 'PUT' ],
   },
   {
     path: '/api/v1/orders/:id/products',
-    methods: [ 'POST' ]
+    methods: [ 'POST' ],
   }
 ]
 ```

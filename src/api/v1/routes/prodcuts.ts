@@ -28,14 +28,14 @@ export default (app: Router, ProductStore: ProductStoreAccess) => {
         return res.status(201).json(data);
     })
 
-    route.delete('/:id', async (req: Request, res: Response) => {
+    route.delete('/:id',verifyAuthToken, async (req: Request, res: Response) => {
         const ProductId = req.params.id;
         console.log(req.params.id);
         await ProductStore.Delete(ProductId);
         return res.status(204).json({message: "resource deleted"});
     })
 
-    route.put('/:id', async (req: Request, res: Response) => {
+    route.put('/:id',verifyAuthToken, async (req: Request, res: Response) => {
         const ProductId = req.params.id;
         console.log(req.params.id);
         const data = await ProductStore.Update(ProductId);

@@ -28,12 +28,15 @@ GRANT ALL PRIVILEGES ON DATABASE storedb TO node_api_user;
 GRANT ALL PRIVILEGES ON DATABASE storedb_test TO node_api_user;
 ```
 
-## update the .ENV file
+## update the Enviroment variables files
 a sample of required .env file is available you need to add all the parameters to run the application successfully 
+- 2 files will be created ".env" & ".env_test"
+- .env      -> will be loaded for the development server
+- .env_test -> will be loaded while testing and contain the testing database
 
 ## Starting the server
 
-- insatall the application requird dependencies
+- install the application requird dependencies
 ```
 npm install
 ```
@@ -50,3 +53,11 @@ npm run serve
 ```
 node /dist/server.js
 ```
+
+## Testing the Application APIs
+A Postman collection is available with all configured API routes and the required inputs
+
+### Create a user
+you must create a user and login to get the API tokken and use it with the Other APIs
+
+- all collection is configured to use the tokken from the main collection Authorization

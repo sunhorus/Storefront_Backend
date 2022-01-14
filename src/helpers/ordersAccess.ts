@@ -6,11 +6,11 @@ import { Order } from "../models/order";
 
 
 export default class OrdersStoreAccess {
-    async Index(): Promise<Order[]> {
+    async Index(userId: number): Promise<Order[]> {
         try {
             const conn = await PostgresClient.connect();
-            const query = 'SELECT * FROM orders';
-            const result = await conn.query(query);
+            const query = 'SELECT * FROM orders WHERE user_id=$1';
+            const result = await conn.query(query,[userId]);
             return result.rows 
         } catch (err) {
             throw new Error(`cannot get orders ${err}`)
@@ -18,11 +18,12 @@ export default class OrdersStoreAccess {
     }
     async Create(newOrder: Order): Promise<Order> {
         try {
+            console.log(newOrder)
             const conn = await PostgresClient.connect();
             const query = 'INSERT INTO orders (status, user_id) VALUES ($1, $2) RETURNING *';
             const result = await conn.query(query, [
                 newOrder.status,
-                newOrder.user_id,
+                newOrder.user_id
             ]);
             return result.rows[0]
         } catch (err) {

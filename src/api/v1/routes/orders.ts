@@ -1,14 +1,18 @@
 import { Router, Request, Response } from "express";
 import OrdersStoreAccess from "../../../helpers/ordersAccess";
 import OrderProductStoreAccess from "../../../helpers/order_productAccess"; 
+import { verifyAuthToken } from "../../../middlewares/AuthMiddleware";
+import { Order } from "../../../models/order";
+import { getUserId } from "../../../services/auth/jwtAuth";
 
 const route = Router();
 
 export default (app: Router, OrderStore: OrdersStoreAccess, OrderProduct: OrderProductStoreAccess) => {
-    app.use('/orders', route);
-
-    route.get('/', async (req: Request, res: Response) => {OrderProductStoreAccess
-        const data = await OrderStore.Index();
+    app.use('/orders', verifyAuthToken, route);
+    
+    route.get('/', async (req: Request, res: Response) => {
+        const userId = getUserId(req.headers.authorization?.split(' ')[1] as string)
+        const data = await OrderStore.Index(parseInt(userId));
         return res.status(200).json(data);
     });
 
@@ -32,6 +36,21 @@ export default (app: Router, OrderStore: OrdersStoreAccess, OrderProduct: OrderP
         return res.status(204).json({ data });
     })
 
+    route.post('/', async(req: Request, res: Response) => {
+        const userId = getUserId(req.headers.authorization?.split(' ')[1] as string)
+        const order: Order ={
+            status: "active",
+            user_id: parseInt(userId)
+        }
+        try {
+            const addedOrder = await OrderStore.Create(order)
+            res.json(addedOrder).status(201)
+        } catch (err) {
+            res.status(400).send(`${err}`)
+        }
+        
+    })
+
     route.post('/:id/products', async (req: Request, res: Response) => {
         const orderId: number = parseInt(req.params.id)
         const productId: number = parseInt(req.body.productId)
@@ -41,8 +60,7 @@ export default (app: Router, OrderStore: OrdersStoreAccess, OrderProduct: OrderP
             const addedProduct = await OrderProduct.addProduct(quantity, orderId, productId)
             res.json(addedProduct)
         } catch (err) {
-            res.status(400)
-            res.json(err)
+            res.status(400).json(`${err}`)
         }
     });
 }
