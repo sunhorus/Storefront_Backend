@@ -28,6 +28,8 @@ GRANT ALL PRIVILEGES ON DATABASE storedb TO node_api_user;
 GRANT ALL PRIVILEGES ON DATABASE storedb_test TO node_api_user;
 ```
 
+## update the .ENV file
+a sample of required .env file is available you need to add all the parameters to run the application successfully 
 
 ## Starting the server
 
@@ -39,4 +41,12 @@ npm install
 - build the application 
 ```
 npm run build
+```
+- run the Dev server
+```
+npm run serve
+```
+- run the productin server
+```
+node /dist/server.js
 ```
