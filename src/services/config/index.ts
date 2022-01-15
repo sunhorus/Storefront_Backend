@@ -24,9 +24,9 @@ export default {
   },
   encrption: {
     pepper: process.env.BCRYPT_PASSWORD,
-    salt: process.env.SALT_ROUNDS
+    salt: process.env.SALT_ROUNDS,
   },
   jwt: {
-    secret: process.env.TOKEN_SECRET
-  }
+    secret: process.env.TOKEN_SECRET,
+  },
 };

@@ -11,8 +11,6 @@ beforeAll((done) => {
   });
 });
 
-
-
 describe('Test products listing', () => {
   it('should return sucess when listing', async () => {
     await request.get('/api/v1/products').send().expect(200);
@@ -21,19 +19,16 @@ describe('Test products listing', () => {
     await request
       .post('/api/v1/products')
       .send({
-        name: "mobile charger",
+        name: 'mobile charger',
         price: 200,
-        category: "mobile accessories"
+        category: 'mobile accessories',
       })
       .expect(201)
       .expect((response) => {
         equal(response.body.name, 'mobile charger');
       });
   });
-
-
 });
 afterAll(async () => {
   await migratorDown();
-  
 });

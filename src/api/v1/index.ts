@@ -11,7 +11,7 @@ import orders from './routes/orders';
 export default () => {
   const app = Router();
 
-  const productStore = new ProductStoreAccess()
+  const productStore = new ProductStoreAccess();
   const userStore = new UsersStoreAccess();
   const orderStore = new OrdersStoreAccess();
   const orderProduct = new OrderProductStoreAccess();
@@ -20,6 +20,6 @@ export default () => {
   prodcuts(app, productStore);
   users(app, userStore);
   orders(app, orderStore, orderProduct);
-  
+
   return app;
 };
