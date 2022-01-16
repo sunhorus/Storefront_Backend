@@ -34,10 +34,10 @@ export default (app: Router, ProductStore: ProductStoreAccess) => {
     return res.status(204).json({ message: 'resource deleted' });
   });
 
-  route.put('/:id', verifyAuthToken, async (req: Request, res: Response) => {
-    const ProductId = req.params.id;
-    // console.log(req.params.id);
-    const data = await ProductStore.Update();
-    return res.status(204).json({ data });
-  });
+  //   route.put('/:id', verifyAuthToken, async (req: Request, res: Response) => {
+  //     const ProductId = req.params.id;
+  //     // console.log(req.params.id);
+  //     const data = await ProductStore.Update();
+  //     return res.status(204).json({ data });
+  //   });
 };

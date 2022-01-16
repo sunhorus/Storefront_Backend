@@ -34,7 +34,7 @@ export default class OrdersStoreAccess {
       const conn = await PostgresClient.connect();
       const query = 'delete from orders where id = $1';
       const result = await conn.query(query, [parseInt(orderId)]);
-      return true;
+      return !!result;
     } catch (err) {
       throw new Error(`cannot Delete order ${err}`);
     }
@@ -50,7 +50,7 @@ export default class OrdersStoreAccess {
       throw new Error(`Could not find product ${orderId}. Error: ${err}`);
     }
   }
-  async Update(ProductId: string): Promise<Order> {
-    throw new Error(`Net Implemented`);
-  }
+  // async Update(ProductId: string): Promise<Order> {
+  //   throw new Error(`Net Implemented`);
+  // }
 }

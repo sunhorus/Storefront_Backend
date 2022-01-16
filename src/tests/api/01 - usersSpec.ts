@@ -1,6 +1,9 @@
 import { app } from '../../server';
 import supertest from 'supertest';
 import { equal } from 'assert';
+import { config } from 'dotenv';
+import jwt, { Secret } from 'jsonwebtoken';
+import { getUserId } from '../../services/auth/jwtAuth';
 
 const request = supertest.agent(app);
 
@@ -16,7 +19,7 @@ describe('01 - Testing user APIs', () => {
       })
       .expect(201)
       .expect((response) => {
-        // equal(response.body.jwt, 1);
+        equal(getUserId(response.body.jwt), 1);
       });
   });
   it('Show: should return sucess when added user retrived', async () => {

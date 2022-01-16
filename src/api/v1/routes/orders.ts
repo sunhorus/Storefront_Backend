@@ -35,12 +35,12 @@ export default (
     return res.status(204).json({ message: 'resource deleted' });
   });
 
-  route.put('/:id', async (req: Request, res: Response) => {
-    const orderId = req.params.id;
-    // console.log(req.params.id);
-    const data = await OrderStore.Update(orderId);
-    return res.status(204).json({ data });
-  });
+  //   route.put('/:id', async (req: Request, res: Response) => {
+  //     const orderId = req.params.id;
+  //     // console.log(req.params.id);
+  //     const data = await OrderStore.Update(orderId);
+  //     return res.status(204).json({ data });
+  //   });
 
   route.post('/', async (req: Request, res: Response) => {
     const userId = getUserId(
