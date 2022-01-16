@@ -15,7 +15,7 @@ export default class OrdersStoreAccess {
   }
   async Create(newOrder: Order): Promise<Order> {
     try {
-      console.log(newOrder);
+      // console.log(newOrder);
       const conn = await PostgresClient.connect();
       const query =
         'INSERT INTO orders (status, user_id) VALUES ($1, $2) RETURNING *';

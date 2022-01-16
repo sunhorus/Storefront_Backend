@@ -35,7 +35,7 @@ export default class ProductStoreAccess implements ProductsStore {
       const conn = await PostgresClient.connect();
       const query = 'delete from products where id = $1';
       const result = await conn.query(query, [parseInt(ProductId)]);
-      return true;
+      return !!result;
     } catch (err) {
       throw new Error(`cannot Delete product ${err}`);
     }
@@ -51,7 +51,7 @@ export default class ProductStoreAccess implements ProductsStore {
       throw new Error(`Could not find product ${ProductId}. Error: ${err}`);
     }
   }
-  async Update(ProductId: string): Promise<Product> {
-    throw new Error(`asdasdasd`);
+  async Update(): Promise<Product> {
+    throw new Error(`not implemented`);
   }
 }

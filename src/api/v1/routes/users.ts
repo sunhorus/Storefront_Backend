@@ -18,7 +18,7 @@ export default (app: Router, UserStore: UsersStoreAccess) => {
     try {
       const newUser = await UserStore.create(user);
       const tokken = signTokken(newUser);
-      res.json(tokken);
+      res.status(201).json({ jwt: tokken });
     } catch (err) {
       res.status(400);
       res.json(`not able to create the user ${err}`);
@@ -33,10 +33,16 @@ export default (app: Router, UserStore: UsersStoreAccess) => {
     try {
       const u = await UserStore.authenticate(user.username, user.password);
       const tokken = signTokken(u as User);
-      res.json(tokken);
+      res.json({ jwt: tokken });
     } catch (err) {
       res.status(401);
       res.json(` authentication error: ${err} for user: ${user}`);
     }
+  });
+
+  route.get('/:id', async (req: Request, res: Response) => {
+    const usertId = req.params.id;
+    const data = await UserStore.show(usertId);
+    return res.status(200).json(data);
   });
 };

@@ -8,6 +8,11 @@ export const verifyAuthToken = (
   next: NextFunction
 ) => {
   try {
+    // if (process.env.NODE_ENV == 'testing') {
+    //   // console.log(`testing Env in Middleware`);
+    //   next();
+    //   return;
+    // }
     const authorizationHeader = req.headers.authorization as string;
     const token = authorizationHeader.split(' ')[1];
     const decoded = jwt.verify(token, config.jwt.secret as Secret);

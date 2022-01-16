@@ -43,7 +43,7 @@ export default class UsersStoreAccess implements UsersStore {
         user.lastName,
         hash,
       ]);
-      console.log(result.rows[0]);
+      //   console.log(result.rows[0]);
       return result.rows[0];
     } catch (err) {
       throw new Error(`cannot add User ${err}`);
@@ -56,7 +56,7 @@ export default class UsersStoreAccess implements UsersStore {
       const result = await conn.query(query, [username]);
       if (result.rows.length) {
         const uPassDigist = result.rows[0];
-        console.log(result.rows[0]);
+        // console.log(result.rows[0]);
         if (
           bcrypt.compareSync(Password + pepper, uPassDigist.password_digest)
         ) {

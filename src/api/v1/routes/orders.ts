@@ -30,14 +30,14 @@ export default (
 
   route.delete('/:id', async (req: Request, res: Response) => {
     const orderId = req.params.id;
-    console.log(req.params.id);
+    // console.log(req.params.id);
     await OrderStore.Delete(orderId);
     return res.status(204).json({ message: 'resource deleted' });
   });
 
   route.put('/:id', async (req: Request, res: Response) => {
     const orderId = req.params.id;
-    console.log(req.params.id);
+    // console.log(req.params.id);
     const data = await OrderStore.Update(orderId);
     return res.status(204).json({ data });
   });
@@ -52,7 +52,7 @@ export default (
     };
     try {
       const addedOrder = await OrderStore.Create(order);
-      res.json(addedOrder).status(201);
+      res.status(201).json(addedOrder);
     } catch (err) {
       res.status(400).send(`${err}`);
     }

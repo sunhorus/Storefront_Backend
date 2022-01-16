@@ -55,9 +55,21 @@ node /dist/server.js
 ```
 
 ## Testing the Application APIs
+
+An automated Spec testing is provided to run and execute all required tests
+```
+npm run test
+```
+
+### Manual testing
 A Postman collection is available with all configured API routes and the required inputs
 
-### Create a user
+#### Create a user
 you must create a user and login to get the API tokken and use it with the Other APIs
 
 - all collection is configured to use the tokken from the main collection Authorization
+
+## Application Specs
+### ports
+- Node Application run on port : 8000
+- Database run on the default port: 5432
