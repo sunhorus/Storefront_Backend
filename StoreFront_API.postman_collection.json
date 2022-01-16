@@ -135,36 +135,6 @@
 					"response": []
 				},
 				{
-					"name": "DELETE: Product",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"mobile charger\",\n    \"price\" : 200,\n    \"category\": \"mobile accessories\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:8000/api/v1/products/2",
-							"host": [
-								"localhost"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"v1",
-								"products",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "GET: products",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -192,7 +162,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8000/api/v1/products",
+							"raw": "localhost:8000/api/v1/products/",
 							"host": [
 								"localhost"
 							],
@@ -200,7 +170,38 @@
 							"path": [
 								"api",
 								"v1",
-								"products"
+								"products",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE: Product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"mobile charger\",\n    \"price\" : 200,\n    \"category\": \"mobile accessories\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/v1/products/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"products",
+								"2"
 							]
 						}
 					},
@@ -245,6 +246,39 @@
 				},
 				{
 					"name": "LogIn",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\" : \"myUsername\",\n    \"password\": \"myStrrongPassword\",\n    \"firstName\": \"firstName\",\n    \"lastName\": \"LastName\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8000/api/v1/users/authenticate",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"users",
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LogIn Copy",
 					"request": {
 						"auth": {
 							"type": "noauth"
