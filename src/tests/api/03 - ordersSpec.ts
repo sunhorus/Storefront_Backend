@@ -21,7 +21,7 @@ describe('03 - Testing Orders APIs', () => {
         equal(response.body.id, '1');
       });
   });
-  it('Index: should return success when User products are listed', async () => {
+  it('Index: should return success when User orders are listed', async () => {
     await request
       .get('/api/v1/orders')
       .set(
@@ -30,7 +30,7 @@ describe('03 - Testing Orders APIs', () => {
       )
       .expect(200)
       .expect((response) => {
-        // console.log(response.body);
+        equal(response.body[0].user_id, '1');
       });
   });
 });
