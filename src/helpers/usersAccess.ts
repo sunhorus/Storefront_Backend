@@ -39,8 +39,8 @@ export default class UsersStoreAccess implements UsersStore {
       const hash = bcrypt.hashSync(user.password_digest + pepper, saltRounds);
       const result = await conn.query(query, [
         user.username,
-        user.firstName,
-        user.lastName,
+        user.firstname,
+        user.lastname,
         hash,
       ]);
       //   console.log(result.rows[0]);

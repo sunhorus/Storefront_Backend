@@ -1,5 +1,6 @@
 import { Router, Request, Response } from 'express';
 import UsersStoreAccess from '../../../helpers/usersAccess';
+import { verifyAuthToken } from '../../../middlewares/AuthMiddleware';
 import { User } from '../../../models/user';
 import { signTokken } from '../../../services/auth/jwtAuth';
 
@@ -12,8 +13,8 @@ export default (app: Router, UserStore: UsersStoreAccess) => {
     const user: User = {
       username: req.body.username,
       password_digest: req.body.password,
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
+      firstname: req.body.firstName,
+      lastname: req.body.lastName,
     };
     try {
       const newUser = await UserStore.create(user);
@@ -40,7 +41,7 @@ export default (app: Router, UserStore: UsersStoreAccess) => {
     }
   });
 
-  route.get('/:id', async (req: Request, res: Response) => {
+  route.get('/:id', verifyAuthToken, async (req: Request, res: Response) => {
     const usertId = req.params.id;
     const data = await UserStore.show(usertId);
     return res.status(200).json(data);

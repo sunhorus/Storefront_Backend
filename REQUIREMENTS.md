@@ -57,26 +57,27 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ## Data Shapes
 #### Product
--  id
-- name
-- price
-- [OPTIONAL] category
+- id SERIAL PRIMARY KEY,
+- name VARCHAR(50),
+- price INTEGER,
+- category VARCHAR(50)
 
 #### User
-- id
-- firstName
-- lastName
-- password_digest
+- id SERIAL PRIMARY KEY
+- username VARCHAR(20)
+- firstName VARCHAR(25) 
+- lastName VARCHAR(25)
+- password_digest VARCHAR(100)
 
 #### Orders
-- id
-- status of order (active or complete)
-- user_id
+- id SERIAL PRIMARY KEY,
+- status VARCHAR(64),
+- user_id bigint REFERENCES users(id)
 
 ### Order_Product
-- id 
-- order_id
-- product_id
-- quantity
+ - id SERIAL PRIMARY KEY,
+ - quantity integer,
+ - order_id bigint REFERENCES orders(id),
+ - product_id bigint REFERENCES products(id)
 
 

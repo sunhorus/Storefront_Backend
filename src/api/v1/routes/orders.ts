@@ -15,24 +15,35 @@ export default (
   app.use('/orders', verifyAuthToken, route);
 
   route.get('/', async (req: Request, res: Response) => {
-    const userId = getUserId(
-      req.headers.authorization?.split(' ')[1] as string
-    );
-    const data = await OrderStore.Index(parseInt(userId));
-    return res.status(200).json(data);
+    try {
+      const userId = getUserId(
+        req.headers.authorization?.split(' ')[1] as string
+      );
+      const data = await OrderStore.Index(parseInt(userId));
+      return res.status(200).json(data);
+    } catch (error) {
+      res.status(400).send(`${error}`);
+    }
   });
 
   route.get('/:id', async (req: Request, res: Response) => {
-    const OrderId = req.params.id;
-    const data = await OrderStore.Show(OrderId);
-    return res.status(200).json(data);
+    try {
+      const OrderId = req.params.id;
+      const data = await OrderStore.Show(OrderId);
+      return res.status(200).json(data);
+    } catch (error) {
+      res.status(400).send(`${error}`);
+    }
   });
 
   route.delete('/:id', async (req: Request, res: Response) => {
-    const orderId = req.params.id;
-    // console.log(req.params.id);
-    await OrderStore.Delete(orderId);
-    return res.status(204).json({ message: 'resource deleted' });
+    try {
+      const orderId = req.params.id;
+      await OrderStore.Delete(orderId);
+      return res.status(204).json({ message: 'resource deleted' });
+    } catch (error) {
+      res.status(400).send(`${error}`);
+    }
   });
 
   //   route.put('/:id', async (req: Request, res: Response) => {

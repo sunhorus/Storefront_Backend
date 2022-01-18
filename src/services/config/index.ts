@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+// process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 let envFilePath = '.env';
 if (process.env.NODE_ENV == 'testing') {
   envFilePath = '.env_test';
