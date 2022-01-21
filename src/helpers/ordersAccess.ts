@@ -23,7 +23,11 @@ export default class OrdersStoreAccess {
         newOrder.status,
         newOrder.user_id,
       ]);
-      return result.rows[0];
+      const resultR = {
+        ...result.rows[0],
+        user_id: parseInt(result.rows[0].user_id),
+      };
+      return resultR;
     } catch (err) {
       throw new Error(`cannot insert order ${err}`);
     }

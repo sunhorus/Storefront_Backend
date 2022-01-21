@@ -71,13 +71,13 @@ export default class UsersStoreAccess implements UsersStore {
     }
   }
 
-  async delete(id: string): Promise<User> {
+  async delete(id: string): Promise<boolean> {
     try {
       const conn = await PostgresClient.connect();
       const sql = 'DELETE FROM users WHERE id=($1)';
       const result = await conn.query(sql, [id]);
-      const user = result.rows[0];
-      return user;
+      // const user = result.rows[0];
+      return !!result;
     } catch (err) {
       throw new Error(`unable delete user (${id}): ${err}`);
     }

@@ -2,6 +2,7 @@ import { app } from '../../server';
 import supertest from 'supertest';
 import { equal } from 'assert';
 import { getUserId } from '../../services/auth/jwtAuth';
+import { testingConf } from './testingConst';
 
 const request = supertest.agent(app);
 
@@ -17,19 +18,26 @@ describe('01 - Testing user APIs', () => {
       })
       .expect(201)
       .expect((response) => {
-        equal(getUserId(response.body.jwt), 1);
+        testingConf.jwt = response.body.jwt;
+        equal(getUserId(response.body.jwt), 2);
       });
   });
   it('Show: should return sucess when added user retrived', async () => {
     await request
-      .get('/api/v1/users/1')
-      .set(
-        'Authorization',
-        'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6Im15VXNlcm5hbWUiLCJmaXJzdG5hbWUiOiJmaXJzdE5hbWUiLCJsYXN0bmFtZSI6Ikxhc3ROYW1lIiwicGFzc3dvcmRfZGlnZXN0IjoiJDJiJDEwJGVsWHdMWkhYaEpPeEtvdzAyVVF5bWVRVkMuMS9YUi5jN1JDVU9wakZmTUxGdGc5YVBPaS9LIn0sImlhdCI6MTY0MjMyOTMzNX0.-evnN5BADwNA7ma9f13mlKYO-icgEVoB0jrGNnaD2Gw'
-      )
+      .get('/api/v1/users/2')
+      .set('Authorization', `bearer ${testingConf.jwt}`)
       .expect(200)
       .expect((response) => {
         equal(response.body.username, 'myUsername');
       });
+  });
+  it('Login: should return sucess when User Authenticated correctly', async () => {
+    await request
+      .post('/api/v1/users/authenticate')
+      .send({
+        username: 'myUsername',
+        password: 'myStrrongPassword',
+      })
+      .expect(200);
   });
 });

@@ -1,6 +1,7 @@
 import { app } from '../../server';
 import supertest from 'supertest';
 import { equal } from 'assert';
+import { testingConf } from './testingConst';
 
 const request = supertest.agent(app);
 //usersFinished
@@ -8,29 +9,29 @@ describe('03 - Testing Orders APIs', () => {
   it('Create: should return sucess when adding new order created for the added user', async () => {
     await request
       .post('/api/v1/orders')
-      .set(
-        'Authorization',
-        'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6Im15VXNlcm5hbWUiLCJmaXJzdG5hbWUiOiJmaXJzdE5hbWUiLCJsYXN0bmFtZSI6Ikxhc3ROYW1lIiwicGFzc3dvcmRfZGlnZXN0IjoiJDJiJDEwJGVsWHdMWkhYaEpPeEtvdzAyVVF5bWVRVkMuMS9YUi5jN1JDVU9wakZmTUxGdGc5YVBPaS9LIn0sImlhdCI6MTY0MjMyOTMzNX0.-evnN5BADwNA7ma9f13mlKYO-icgEVoB0jrGNnaD2Gw'
-      )
+      .set('Authorization', `bearer ${testingConf.jwt}`)
       .send()
       .expect(201)
       .expect((response) => {
         equal(response.body.status, 'active');
       })
       .expect((response) => {
-        equal(response.body.id, '1');
+        equal(response.body.id, '2');
       });
   });
   it('Index: should return success when User orders are listed', async () => {
     await request
       .get('/api/v1/orders')
-      .set(
-        'Authorization',
-        'bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoxLCJ1c2VybmFtZSI6Im15VXNlcm5hbWUiLCJmaXJzdG5hbWUiOiJmaXJzdE5hbWUiLCJsYXN0bmFtZSI6Ikxhc3ROYW1lIiwicGFzc3dvcmRfZGlnZXN0IjoiJDJiJDEwJGVsWHdMWkhYaEpPeEtvdzAyVVF5bWVRVkMuMS9YUi5jN1JDVU9wakZmTUxGdGc5YVBPaS9LIn0sImlhdCI6MTY0MjMyOTMzNX0.-evnN5BADwNA7ma9f13mlKYO-icgEVoB0jrGNnaD2Gw'
-      )
+      .set('Authorization', `bearer ${testingConf.jwt}`)
       .expect(200)
       .expect((response) => {
-        equal(response.body[0].user_id, '1');
+        equal(response.body[0].user_id, '2');
       });
+  });
+  it('Delete: should return success when User order is deleted', async () => {
+    await request
+      .delete('/api/v1/orders/2')
+      .set('Authorization', `bearer ${testingConf.jwt}`)
+      .expect(204);
   });
 });
